@@ -60,7 +60,7 @@ const displayPhoneDetails = info => {
                     <p id="release-date" class="card-text">
                     ${info.releaseDate ? info.releaseDate : "No release date found"}</p>
                     <p class="card-text fw-bold">Main Features</p>
-                    <p class="card-text">Chipset: <small class="text-muted">${info.mainFeatures.chipSet}</small></p>
+                    <p class="card-text">Chipset: <small class="text-muted">${info.mainFeatures.chipSet ? info.mainFeatures.chipSet : 'Not Found'}</small></p>
                     <p class="card-text">Display-size: <small class="text-muted">${info.mainFeatures.displaySize}</small></p>
                     <p class="card-text">Memory: <small class="text-muted">${info.mainFeatures.memory}</small></p>
                     <p class="card-text">Storage: <small class="text-muted">${info.mainFeatures.storage}</small></p>
