@@ -50,31 +50,25 @@ const phoneDetails = id => {
 const displayPhoneDetails = info => {
     const resultDetails = document.getElementById('result-details');
     resultDetails.innerHTML = `
-        <div class="card mx-auto" style="width: 56rem;">
+        <div class="card mx-auto" style="max-width: 768px;">
             <div class="row">
-                <div class="col-md-6">
-                    <img src="${info.image}" class="card-img-top" alt="...">
+                <div class="col-12 col-md-5 d-block m-auto">
+                    <img src="${info.image}" class="card-img-top img-fluid" alt="...">
                 </div>
-                <div class="card-body col-md-6">
+                <div class="card-body col-12 col-md-7">
                     <h5 class="card-title">${info.name}</h5>
-                    <p id="release-date" class="card-text">${getReleaseDate(info.releaseDate)}</p>
+                    <p id="release-date" class="card-text">
+                    ${info.releaseDate ? info.releaseDate : "No release date found"}</p>
+                    <p class="card-text fw-bold">Main Features</p>
                     <p class="card-text">Chipset: <small class="text-muted">${info.mainFeatures.chipSet}</small></p>
                     <p class="card-text">Display-size: <small class="text-muted">${info.mainFeatures.displaySize}</small></p>
                     <p class="card-text">Memory: <small class="text-muted">${info.mainFeatures.memory}</small></p>
                     <p class="card-text">Storage: <small class="text-muted">${info.mainFeatures.storage}</small></p>
-                    <p class="card-text">Sensor Info: <small class="text-muted">${info.mainFeatures.sensors}</small></p>
-                    <p class="card-text fw-bold">Other Information: </p>
-                    <p class="card-text">Bluetooth: <small class="text-muted">${info.others.Bluetooth}</small><br>GPS: <small class="text-muted"> ${info.others.GPS}</small><br>NFC: <small class="text-muted">${info.others.NFC}</small><br>Radio: <small class="text-muted">${info.others.Radio}</small><br>USB: <small class="text-muted">${info.others.USB}</small><br>WLAN: <small class="text-muted">${info.others.WLAN}</small></p>
+                    <p class="card-text">Sensor Info: <small class="text-muted">${info.mainFeatures.sensors.join(', ')}</small></p>
+                    <p class="card-text fw-bold">Other Information</p>
+                    <p class="card-text">Bluetooth: <small class="text-muted">${info.others ? info.others.Bluetooth : "Not found"}</small><br>GPS: <small class="text-muted"> ${info.others ? info.others.GPS : "Not found"}</small><br>NFC: <small class="text-muted">${info.others ? info.others.NFC : "Not found"}</small><br>Radio: <small class="text-muted">${info.others ? info.others.Radio : "Not found"}</small><br>USB: <small class="text-muted">${info.others ? info.others.USB : "Not found"}</small><br>WLAN: <small class="text-muted">${info.others ? info.others.WLAN : "Not found"}</small></p>
                 </div>
             </div>
         </div>
     `
-}
-const getReleaseDate = date => {
-    if (date === '') {
-        return 'No release date found';
-    }
-    else {
-        return date;
-    }
 }
