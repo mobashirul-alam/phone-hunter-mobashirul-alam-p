@@ -4,16 +4,28 @@ document.getElementById('search-button').addEventListener('click', function () {
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
     fetch(url)
         .then(res => res.json())
-        .then(data => displayPhone(data.data))
+        .then(data => displayPhone(data))
+    document.getElementById('input-area').value = ''
 })
 
 const displayPhone = phones => {
     const displayResult = document.getElementById('display-results');
-    for (const phone of phones) {
-        // console.log(phone.slug)
-        const div = document.createElement('div');
-        div.classList.add('col')
-        div.innerHTML = `
+    displayResult.textContent = '';
+    const resultDetails = document.getElementById('result-details');
+    resultDetails.textContent = '';
+    if (phones.status === false) {
+        const errorField = document.getElementById('error-field');
+        errorField.innerText = `Oops!!! No Phone found...`
+    }
+    else {
+        const errorField = document.getElementById('error-field');
+        errorField.innerText = '';
+        const phoneLimit = phones.data.slice(0, 20);
+        for (const phone of phoneLimit) {
+            // console.log(phone.slug)
+            const div = document.createElement('div');
+            div.classList.add('col')
+            div.innerHTML = `
             <div class="card h-100 p-3 bg-light">
                 <img src="${phone.image}" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -23,7 +35,8 @@ const displayPhone = phones => {
                 </div>
             </div>
         `
-        displayResult.appendChild(div)
+            displayResult.appendChild(div)
+        }
     }
 }
 // ---------- Phone details in top ----------
@@ -44,7 +57,7 @@ const displayPhoneDetails = info => {
                 </div>
                 <div class="card-body col-md-6">
                     <h5 class="card-title">${info.name}</h5>
-                    <p class="card-text">${info.releaseDate}</p>
+                    <p id="release-date" class="card-text">${getReleaseDate(info.releaseDate)}</p>
                     <p class="card-text">Chipset: <small class="text-muted">${info.mainFeatures.chipSet}</small></p>
                     <p class="card-text">Display-size: <small class="text-muted">${info.mainFeatures.displaySize}</small></p>
                     <p class="card-text">Memory: <small class="text-muted">${info.mainFeatures.memory}</small></p>
@@ -57,4 +70,11 @@ const displayPhoneDetails = info => {
         </div>
     `
 }
-
+const getReleaseDate = date => {
+    if (date === '') {
+        return 'No release date found';
+    }
+    else {
+        return date;
+    }
+}
