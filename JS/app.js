@@ -32,5 +32,28 @@ const phoneDetails = id => {
     const url = `https://openapi.programming-hero.com/api/phone/${id}`;
     fetch(url)
         .then(res => res.json())
-        .then(data => console.log(data.data))
+        .then(data => displayPhoneDetails(data.data))
+}
+
+const displayPhoneDetails = info => {
+    console.log(info)
+    const resultDetails = document.getElementById('result-details');
+    resultDetails.innerHTML = `
+        <div class="card mx-auto" style="width: 52rem;">
+            <div class="row">
+                <div class="col-md-5">
+                    <img src="${info.image}" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body col-md-7">
+                    <h5 class="card-title">${info.name}</h5>
+                    <p class="card-text">${info.releaseDate}</p>
+                    <p class="card-text">Chipset: <span class="text-muted">${info.mainFeatures.chipSet}</span></p>
+                    <p class="card-text">Display-size: <span class="text-muted">${info.mainFeatures.displaySize}</span></p>
+                    <p class="card-text">Memory: <span class="text-muted">${info.mainFeatures.memory}</span></p>
+                    <p class="card-text">Storage: <span class="text-muted">${info.mainFeatures.storage}</span></p>
+                    
+                </div>
+            </div>
+        </div>
+    `
 }
