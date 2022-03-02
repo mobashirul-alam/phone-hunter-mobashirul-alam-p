@@ -28,7 +28,6 @@ const displayPhone = phones => {
 }
 // ---------- Phone details in top ----------
 const phoneDetails = id => {
-    // console.log(id)
     const url = `https://openapi.programming-hero.com/api/phone/${id}`;
     fetch(url)
         .then(res => res.json())
@@ -36,24 +35,26 @@ const phoneDetails = id => {
 }
 
 const displayPhoneDetails = info => {
-    console.log(info)
     const resultDetails = document.getElementById('result-details');
     resultDetails.innerHTML = `
-        <div class="card mx-auto" style="width: 52rem;">
+        <div class="card mx-auto" style="width: 56rem;">
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <img src="${info.image}" class="card-img-top" alt="...">
                 </div>
-                <div class="card-body col-md-7">
+                <div class="card-body col-md-6">
                     <h5 class="card-title">${info.name}</h5>
                     <p class="card-text">${info.releaseDate}</p>
-                    <p class="card-text">Chipset: <span class="text-muted">${info.mainFeatures.chipSet}</span></p>
-                    <p class="card-text">Display-size: <span class="text-muted">${info.mainFeatures.displaySize}</span></p>
-                    <p class="card-text">Memory: <span class="text-muted">${info.mainFeatures.memory}</span></p>
-                    <p class="card-text">Storage: <span class="text-muted">${info.mainFeatures.storage}</span></p>
-                    
+                    <p class="card-text">Chipset: <small class="text-muted">${info.mainFeatures.chipSet}</small></p>
+                    <p class="card-text">Display-size: <small class="text-muted">${info.mainFeatures.displaySize}</small></p>
+                    <p class="card-text">Memory: <small class="text-muted">${info.mainFeatures.memory}</small></p>
+                    <p class="card-text">Storage: <small class="text-muted">${info.mainFeatures.storage}</small></p>
+                    <p class="card-text">Sensor Info: <small class="text-muted">${info.mainFeatures.sensors}</small></p>
+                    <p class="card-text fw-bold">Other Information: </p>
+                    <p class="card-text">Bluetooth: <small class="text-muted">${info.others.Bluetooth}</small><br>GPS: <small class="text-muted"> ${info.others.GPS}</small><br>NFC: <small class="text-muted">${info.others.NFC}</small><br>Radio: <small class="text-muted">${info.others.Radio}</small><br>USB: <small class="text-muted">${info.others.USB}</small><br>WLAN: <small class="text-muted">${info.others.WLAN}</small></p>
                 </div>
             </div>
         </div>
     `
 }
+
